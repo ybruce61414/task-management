@@ -2,28 +2,59 @@
 import styles from './styles.module.scss'
 import CustomCard from './Card/index.jsx'
 import { useState } from 'react'
+import DetailDrawer from './DetailDrawer/index.jsx'
+import useFetchTasks from '../../hooks/useFetchTaks.jsx'
+import LoadingFallback from '../../components/LoadingFallback.jsx'
+import { TaskHeader, CreateBtn } from './Atoms'
+
 
 const TaskList = () => {
-  const [cards, setCards] = useState([1,2,3,4,5,6,7,8,9,10])
+  // useEffect to fetch data
+  const [isOpen, setOpen] = useState(false)
+
+  const { isLoading, rawData: taskData } = useFetchTasks()
+
+  const toggleDrawer = open => event => {
+    if (
+      event?.type === 'keydown' &&
+      (event?.key === 'Tab' || event?.key === 'Shift')
+    ) return
+
+    setOpen(open)
+  }
+
+
+
+console.log('---taskData', taskData)
+
+
 
   return (
     <div className={styles.layout}>
-      <header className={styles.header}>
-        Task Management
-      </header>
+      <TaskHeader />
       <section className={styles.content}>
-        <article>
-          {cards.map((card, idx) => {
-            return (
-              <CustomCard
-                id={idx}
-                key={idx}
-                data={card}
-              />
-            )
-          })}
-        </article>
+        {isLoading? <LoadingFallback /> : (
+          <>
+            <article>
+              {(taskData.value).map((card, idx) => {
+                return (
+                  <CustomCard
+                    data={card}
+                    key={`card-${card?.taskId ?? idx}`}
+                    externalCallback={toggleDrawer(true)}
+                  />
+                )
+              })}
+            </article>
+            <CreateBtn onCreate={null} />
+          </>
+        )}
       </section>
+      <DetailDrawer
+        anchor="right"
+        open={isOpen}
+        onClose={toggleDrawer(false)}
+      />
     </div>
   )
 }

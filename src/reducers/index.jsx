@@ -1,0 +1,27 @@
+export const DATA_STATE = {
+  init: 'INIT',
+  fetching: 'FETCHING',
+  ready: 'READY',
+  reload: 'RELOAD',
+  failed: 'FAILED'
+};
+
+export const initialDataState = {
+  state: DATA_STATE.init,
+  value: {},
+}
+
+export const apiDataReducer = (state, action) => {
+  switch (action.type) {
+    case DATA_STATE.fetching:
+      return { state: DATA_STATE.fetching, value: {} }
+    case DATA_STATE.reload:
+      return { state: DATA_STATE.reload, value: {} }
+    case DATA_STATE.ready:
+      return { state: DATA_STATE.ready, value: action.value }
+    case DATA_STATE.failed:
+      return { state: DATA_STATE.failed, value: null }
+    default:
+      throw new Error('unknown action type')
+  }
+}

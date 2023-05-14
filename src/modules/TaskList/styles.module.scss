@@ -21,6 +21,7 @@
 .content {
   width: 100%;
   height: calc(100% - 100px);
+  position: relative;
   box-sizing: border-box;
   overflow-y: scroll;
   display: flex;
@@ -28,4 +29,10 @@
   justify-content: flex-start;
   align-items: center;
   border: 2px dashed white;
+}
+
+.createBtn {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
 }

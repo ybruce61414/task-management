@@ -2,6 +2,7 @@ import { ROUTES_CONFIG } from './const.js'
 import TaskList from '../modules/TaskList'
 import App from '../App.jsx'
 import LoadingFallback from '../components/LoadingFallback.jsx'
+import ViewDetail from '../modules/TaskList/ViewDetail/index.jsx'
 
 // todo: need middleware
 export const genRouteConfigs = () => {
@@ -13,9 +14,13 @@ export const genRouteConfigs = () => {
     {
       path: ROUTES_CONFIG.TASK_LIST.route,
       element: <TaskList />,
-    },{
+    },
+    {
+      path: `${ROUTES_CONFIG.TASK_LIST.route}/:taskId`,
+      element: <ViewDetail />,
+    },
+    {
       path: '*',
-      // element: <div>non-where</div>,
       element: <LoadingFallback />
     },
   ]
