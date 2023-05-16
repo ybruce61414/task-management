@@ -1,137 +1,145 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
-// import CardActions from '@mui/material/CardActions'
 import Avatar from '@mui/material/Avatar'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import { red } from '@mui/material/colors'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-// import FavoriteIcon from '@mui/icons-material/Favorite'
-// import ShareIcon from '@mui/icons-material/Share'
 import { useNavigate } from 'react-router-dom'
 import { ROUTES_CONFIG } from '../../../routes/const.js'
-import {
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  MenuList,
-} from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
+import { useTasksContext } from '../../../contexts/contextStore.jsx'
+import { DATA_STATE } from '../../../reducers/index.jsx'
+import ActionGroup from './ActionGroup.jsx'
+import dayjs from 'dayjs'
+import { dateFormatter } from '../../../utils/index.js'
+import { styled } from '@mui/material'
 
 
+const CustomTypography = styled(Typography)`
+  // something wrong with padding
+  height: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  white-space: pre-wrap;
+`
 
 const CustomCard = props => {
-  const { data, externalCallback } = props
+  const { data, toggleDetail } = props
   const {
     taskId,
     name,
     description,
-    'create-date': createDate,
+    date,
   } = data
+
+
   const navigate = useNavigate()
+  const { dispatchTaskData } = useTasksContext()
 
 
   const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
 
-  const handleClick = (event) => {
+  // callbacks
+  const onMore = event => {
     setAnchorEl(event.currentTarget)
   }
+
   const handleClose = () => {
     setAnchorEl(null)
   }
 
   const onEdit = () => {
+    handleClose()
     // detail
     // navigate(`${ROUTES_CONFIG.TASK_LIST.route}/${taskId}`)
 
-    console.log('---onEdit')
-
-    if (externalCallback) {
-      externalCallback()
+    if (toggleDetail) {
+      toggleDetail(data)
     } else {
       navigate(`${ROUTES_CONFIG.TASK_LIST.route}/${taskId}`)
     }
-    handleClose()
+
   }
 
-  const onDelete = () => {
+  const onDelete = async () => {
     console.log('-onDelete--')
+    try {
+      handleClose()
+      dispatchTaskData({ type: DATA_STATE.reload })
+
+      const res = await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-type': 'application/json'
+        }
+      })
+
+      console.log('----res delete', res)
+      // await for the resource to be deleted
+      // Return response data
+
+    } catch (err) {
+      console.error(err)
+    }
   }
+
 
   return (
     <Card sx={{
-      maxWidth: 450,
-      minWidth: 360,
+      maxWidth: 430,
+      minWidth: 430,
+      height: 240,
       margin: '20px 0',
       borderLeft: '3px solid #f44337',
     }}>
       <CardHeader
+        style={{
+          boxSizing: 'border-box',
+          height: '72px'
+      }}
         avatar={
           <Avatar
-            sx={{ bgcolor: red[500] }}
-            aria-label="recipe"
+            sx={{
+              bgcolor: red[500],
+              fontSize:'16px',
+          }}
+            aria-label="task-number"
           >
             {taskId}
           </Avatar>
         }
         action={
-          <>
-            <IconButton
-              onClick={handleClick}
-              aria-label="more-btn"
-            >
-              <MoreVertIcon />
-            </IconButton>
-            <Menu
-              id="long-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'long-button',
-                style: {
-                  padding: 0,
-                }
-              }}
-              PaperProps={{
-                style: {
-                  width: 160
-                },
-              }}
-            >
-              <MenuList dense>
-                <MenuItem onClick={onDelete}>
-                  <ListItemIcon>
-                    <DeleteIcon />
-                  </ListItemIcon>
-                  <ListItemText>Delete</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={onEdit}>
-                  <ListItemIcon>
-                    <EditIcon />
-                  </ListItemIcon>
-                  <ListItemText>Edit</ListItemText>
-                </MenuItem>
-              </MenuList>
-            </Menu>
-          </>
+        <ActionGroup
+          onMore={onMore}
+          anchorEl={anchorEl}
+          handleClose={handleClose}
+          onDelete={onDelete}
+          onEdit={onEdit}
+        />
         }
         title={name}
-        subheader="September 14, 2016"
+        subheader={dateFormatter(
+          dayjs(date).year(),
+          dayjs(date).month(),
+          dayjs(date).date()
+        )}
       />
-      <CardContent>
-        <Typography
+      <CardContent
+        style={{
+          boxSizing: 'border-box',
+          height: 'calc(100% - 72px)'
+        }}
+      >
+        <CustomTypography
           variant="body2"
           color="text.secondary"
         >
           {description}
-        </Typography>
+        </CustomTypography>
       </CardContent>
     </Card>
   )
@@ -139,10 +147,8 @@ const CustomCard = props => {
 
 CustomCard.propTypes = {
   data: PropTypes.object.isRequired,
-  externalCallback: PropTypes.func
+  toggleDetail: PropTypes.func
 }
 
-// CustomCard.defaultProps = {
-// }
 
 export default CustomCard

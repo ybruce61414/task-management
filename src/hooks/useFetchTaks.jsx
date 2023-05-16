@@ -4,13 +4,16 @@ import { DATA_STATE } from '../reducers/index.jsx'
 
 
 const useFetchTasks = () => {
-  const [isLoading, setLoading] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
   const { taskData, dispatchTaskData } = useTasksContext()
 
   const fetchData = async () => {
     try {
+      setIsFetching(true)
       const res = await fetch('http://localhost:5173/api/task-list')
       const finalRes = await res.json()
+
+
       dispatchTaskData({
         type: DATA_STATE.ready,
         value: finalRes.data || [],
@@ -19,7 +22,7 @@ const useFetchTasks = () => {
       console.error(err)
       dispatchTaskData({ type: DATA_STATE.failed })
     } finally {
-      setLoading(false)
+      setIsFetching(false)
     }
   }
 
@@ -33,7 +36,7 @@ const useFetchTasks = () => {
   }, [taskData.state])
 
   return {
-    isLoading,
+    isFetching,
     rawData: taskData,
   }
 }

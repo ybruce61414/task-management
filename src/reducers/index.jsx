@@ -11,12 +11,12 @@ export const initialDataState = {
   value: {},
 }
 
-export const apiDataReducer = (state, action) => {
+export const apiDataReducer = initValue => (state, action) => {
   switch (action.type) {
     case DATA_STATE.fetching:
-      return { state: DATA_STATE.fetching, value: {} }
+      return { state: DATA_STATE.fetching, value: initValue }
     case DATA_STATE.reload:
-      return { state: DATA_STATE.reload, value: {} }
+      return { state: DATA_STATE.reload, value: state.value }
     case DATA_STATE.ready:
       return { state: DATA_STATE.ready, value: action.value }
     case DATA_STATE.failed:

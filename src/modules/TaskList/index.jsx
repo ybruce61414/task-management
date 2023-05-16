@@ -1,60 +1,89 @@
 
 import styles from './styles.module.scss'
 import CustomCard from './Card/index.jsx'
-import { useState } from 'react'
+import {useCallback, useRef, useState} from 'react'
 import DetailDrawer from './DetailDrawer/index.jsx'
 import useFetchTasks from '../../hooks/useFetchTaks.jsx'
 import LoadingFallback from '../../components/LoadingFallback.jsx'
-import { TaskHeader, CreateBtn } from './Atoms'
+import {TaskHeader, CreateBtn, ScrollContainer, ItemCount, ScrollContent} from './Atoms'
+import { DATA_STATE } from '../../reducers/index.jsx'
+import dayjs from 'dayjs'
+
 
 
 const TaskList = () => {
   // useEffect to fetch data
   const [isOpen, setOpen] = useState(false)
+  const [detailData, setDetailData] = useState({})
 
-  const { isLoading, rawData: taskData } = useFetchTasks()
+  const { isFetching, rawData: taskData } = useFetchTasks()
+  const isLoading = isFetching || taskData.state === DATA_STATE.reload
 
-  const toggleDrawer = open => event => {
-    if (
-      event?.type === 'keydown' &&
-      (event?.key === 'Tab' || event?.key === 'Shift')
-    ) return
+  // ref
+  const container = useRef()
 
+  // callbacks
+  const toggleDrawer = useCallback(open => {
     setOpen(open)
-  }
+  }, [])
+
+  const toggleDetail = useCallback((data) => {
+    setDetailData(data)
+    toggleDrawer(true)
+  }, [toggleDrawer])
+
+  const onCloseDrawer = useCallback(() => {
+    toggleDrawer(false)
+  }, [toggleDrawer])
+
+  const toggleCreate = useCallback(() => {
+    console.log('-toggleCreate--')
+    setDetailData({ date: dayjs().format() })
+    toggleDrawer(true)
+  }, [toggleDrawer])
+
+  console.log('---task list render', isLoading, taskData)
 
 
-
-console.log('---taskData', taskData)
-
+  // todo: infinite scroll
+  const handleOnScroll = useCallback(event => {
+    console.log('----onscroll', event)
+  }, [])
 
 
   return (
     <div className={styles.layout}>
       <TaskHeader />
       <section className={styles.content}>
-        {isLoading? <LoadingFallback /> : (
-          <>
-            <article>
-              {(taskData.value).map((card, idx) => {
-                return (
-                  <CustomCard
-                    data={card}
-                    key={`card-${card?.taskId ?? idx}`}
-                    externalCallback={toggleDrawer(true)}
-                  />
-                )
-              })}
-            </article>
-            <CreateBtn onCreate={null} />
-          </>
-        )}
+        {isLoading && <LoadingFallback />}
+        <ItemCount visible={{ from:0, to: 10 }} />
+        <ScrollContainer
+          ref={container}
+          onScroll={handleOnScroll}
+        >
+          <ScrollContent>
+            {(taskData.value).map((card, idx) => {
+              return (
+                <CustomCard
+                  data={card}
+                  key={`card-${card?.taskId ?? idx}`}
+                  toggleDetail={toggleDetail}
+                />
+              )
+            })}
+          </ScrollContent>
+
+        </ScrollContainer>
+        <CreateBtn onCreate={toggleCreate} />
       </section>
-      <DetailDrawer
-        anchor="right"
-        open={isOpen}
-        onClose={toggleDrawer(false)}
-      />
+      {taskData.state === DATA_STATE.ready && (
+        <DetailDrawer
+          anchor="right"
+          open={isOpen}
+          data={detailData}
+          onClose={onCloseDrawer}
+        />
+      )}
     </div>
   )
 }

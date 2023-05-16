@@ -8,7 +8,6 @@ import makeMockServer from './mockApiServer'
 
 const urlQueryMap = getUrlQueryMap()
 
-console.log('-matchQueries--', urlQueryMap)
 
 if (urlQueryMap?.mock === 'true') {
   // activate mock server

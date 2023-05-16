@@ -1,3 +1,5 @@
+//$color-green: #27ae60;
+
 .layout {
   width: 100%;
   height: 100%;
@@ -14,8 +16,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 34px;
-  border: 2px dashed red;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15),
+  0 4px 8px rgba(0,0,0,0.15),
+  0 8px 16px rgba(0,0,0,0.15),
+  0 16px 32px rgba(0,0,0,0.15);
+  //border: 2px dashed red;
 }
 
 .content {
@@ -28,11 +34,62 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 2px dashed white;
+  //border: 2px dashed white;
 }
 
 .createBtn {
   position: fixed;
   bottom: 50px;
   right: 50px;
+}
+
+.formHeader {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formActionBar {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //border: 2px dashed #535bf2;
+}
+
+.ScrollContainer {
+  height: 100%;
+  width: 500px;
+  box-sizing: border-box;
+  overflow: scroll;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2), 0 0 25px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.scrollContent {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  //border: 2px dashed blue;
+}
+
+.item-count {
+  width: 500px;
+  margin: 16px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+
+  .visible {
+    color: #fff;
+    font-weight: bold;
+  }
 }

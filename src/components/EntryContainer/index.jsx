@@ -9,6 +9,8 @@ import { genRouteConfigs } from '../../routes/config.jsx'
 import LoadingFallback from '../LoadingFallback.jsx'
 import styles from './styles.module.scss'
 import TasksProvider from '../../contexts/providers/TasksProvider.jsx'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 
 const EntryContainer = () => {
@@ -28,12 +30,14 @@ const EntryContainer = () => {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main className={styles.layout}>
-        <TasksProvider>
-          <RouterProvider
-            router={router}
-            fallbackElement={<LoadingFallback />}
-          />
-        </TasksProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TasksProvider>
+            <RouterProvider
+              router={router}
+              fallbackElement={<LoadingFallback />}
+            />
+          </TasksProvider>
+        </LocalizationProvider>
       </main>
     </ThemeProvider>
   )

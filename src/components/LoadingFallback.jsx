@@ -12,8 +12,6 @@ const LoadingFallback = () => {
       <CircularProgress color="inherit" />
     </Backdrop>
   )
-
-  // return <div>fallback</div>
 }
 
 export default LoadingFallback

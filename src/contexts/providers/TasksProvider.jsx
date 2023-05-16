@@ -7,11 +7,13 @@ const initialTasks = {
   state: DATA_STATE.init,
   value: [],
 }
+
+const taskReducer = apiDataReducer([])
 const TasksProvider = props => {
   const { children } = props
 
   const [taskData, dispatchTaskData] = useReducer(
-    apiDataReducer,
+    taskReducer,
     initialTasks,
   )
 
@@ -29,6 +31,6 @@ const TasksProvider = props => {
 
 TasksProvider.propTypes = {
   children: PropTypes.element.isRequired,
-};
+}
 
 export default TasksProvider
