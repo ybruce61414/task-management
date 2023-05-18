@@ -54,7 +54,7 @@ export const ItemCount = props => {
     <div className={styles['item-count-wrapper']}>
       <div className={styles['item-count']}>
         {`Total: ${total}`}
-        <div className={styles.visible}>{from + 1}-{to}</div>
+        <div className={styles.visible}>{from === 0? 0: from + 1}-{to}</div>
       </div>
     </div>
   )
@@ -77,6 +77,22 @@ export const CreateBtn = props => {
   )
 }
 
+export const NoData = () => {
+  return (
+    <div className={styles['no-data']}>
+      No data
+    </div>
+  )
+}
+
+export const ServerError = () => {
+  return (
+    <div className={styles['no-data']}>
+      <div>No data</div>
+      <p><code>server error</code></p>
+    </div>
+  )
+}
 
 
 // propTypes
@@ -85,7 +101,10 @@ TaskContent.propTypes = {
 }
 
 ScrollContent.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOf([
+    PropTypes.array,
+    PropTypes.element,
+  ].isRequired),
 }
 
 ScrollContainer.propTypes = {

@@ -55,7 +55,6 @@ const useCalendarInput = props => {
 
 
   useEffect(() => {
-    console.log('--uu initValue-',initValue)
     setValue(initValue)
   }, [initValue])
 

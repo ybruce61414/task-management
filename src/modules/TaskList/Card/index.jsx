@@ -55,8 +55,6 @@ const CustomCard = props => {
 
   const onEdit = () => {
     handleClose()
-    // detail
-    // navigate(`${ROUTES_CONFIG.TASK_LIST.route}/${taskId}`)
 
     if (toggleDetail) {
       toggleDetail(data)
@@ -67,19 +65,17 @@ const CustomCard = props => {
   }
 
   const onDelete = async () => {
-    console.log('-onDelete--')
     try {
       handleClose()
       dispatchTaskData({ type: DATA_STATE.reload })
 
-      const res = await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
+      await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json'
         }
       })
 
-      console.log('----res delete', res)
       // await for the resource to be deleted
       // Return response data
 
@@ -91,8 +87,6 @@ const CustomCard = props => {
 
   return (
     <Card sx={{
-      // maxWidth: 430,
-      // minWidth: 430,
       width: '90%',
       height: 240,
       boxSizing: 'borer-box',

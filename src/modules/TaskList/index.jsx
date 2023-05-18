@@ -2,7 +2,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import styles from './styles.module.scss'
-import CustomCard from './Card/index.jsx'
 import DetailDrawer from './DetailDrawer/index.jsx'
 import useFetchTasks from '../../hooks/api/useFetchTaks.jsx'
 import LoadingOverlay from '../../components/LoadingOverlay'
@@ -16,6 +15,7 @@ import {
 } from './Atoms'
 import { DATA_STATE } from '../../reducers/index.jsx'
 import { throttle } from './utils.js'
+import CardSection from './CardSection/index.jsx'
 
 const ITEM_HEIGHT = 240 + 40
 const BUFFER_UNIT = 10
@@ -52,7 +52,6 @@ const TaskList = () => {
   }, [onOpenDrawer])
 
   const toggleCreate = useCallback(() => {
-    console.log('-toggleCreate--')
     setDetailData({ date: dayjs().format() })
     onOpenDrawer()
   }, [onOpenDrawer])
@@ -61,7 +60,7 @@ const TaskList = () => {
 
   // infinite scroll
   const handleOnScroll = useCallback(() => {
-    const totalItems = taskData.value.length
+    const totalItems = taskData.value?.length || 0
     const { clientHeight, scrollTop } = container.current
 
     const _clientViewItems = Math.ceil(clientHeight / ITEM_HEIGHT)
@@ -72,7 +71,6 @@ const TaskList = () => {
     const _viewFrom = (_originFrom - BUFFER_UNIT < 0)? 0:( _originFrom - BUFFER_UNIT)
     const _viewTo = Math.min(_originFrom + _clientViewItems + BUFFER_UNIT, totalItems)
 
-    // console.log('---_originFrom----')
     if (_viewFrom !== visible.viewFrom || _viewTo !== visible.viewTo) {
       setVisible({
         viewFrom: _viewFrom,
@@ -84,7 +82,7 @@ const TaskList = () => {
 
   }, [
     container.current,
-    taskData.value.length,
+    taskData.value?.length,
     setVisible,
     visible.viewFrom,
     visible.viewTo
@@ -98,7 +96,6 @@ const TaskList = () => {
     }
   }, [taskData.state])
 
-  console.log('---visible', visible)
 
   return (
     <div className={styles.layout}>
@@ -106,7 +103,7 @@ const TaskList = () => {
       <TaskContent>
         {isLoading && <LoadingOverlay />}
         <ItemCount
-          total={taskData.value?.length}
+          total={taskData.value?.length || 0}
           visible={{
             from: visible.originFrom,
             to: visible.originTo,
@@ -117,23 +114,12 @@ const TaskList = () => {
           onScroll={throttleOnScroll}
         >
           <ScrollContent>
-            <div style={{
-              height: visible.viewFrom * ITEM_HEIGHT,
-            }}/>
-            {(taskData.value
-              .slice(visible.viewFrom, visible.viewTo + 1))
-              .map((card, idx) => {
-              return (
-                <CustomCard
-                  data={card}
-                  key={`card-${card?.taskId ?? idx}`}
-                  toggleDetail={toggleDetail}
-                />
-              )
-            })}
-            <div style={{
-              height: (taskData.value.length - visible.viewTo) * ITEM_HEIGHT,
-            }}/>
+            <CardSection
+              taskData={taskData}
+              visible={visible}
+              toggleDetail={toggleDetail}
+              ITEM_HEIGHT={ITEM_HEIGHT}
+            />
           </ScrollContent>
         </ScrollContainer>
         <CreateBtn onCreate={toggleCreate} />

@@ -103,13 +103,12 @@ const DetailDrawer = props => {
   // callbacks
   const onEdit = async () => {
     try {
-      console.log('-onEdit--')
       onClose()
       dispatchTaskData({ type: DATA_STATE.reload })
 
       const url = `http://localhost:5173/api/task-list/${taskId}`
 
-      const res = await fetch(url, {
+      await fetch(url, {
         method: 'PATCH',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -120,7 +119,6 @@ const DetailDrawer = props => {
           date: dateValue,
         }),
       })
-      console.log('---patch', res)
     } catch (err) {
       console.error(err)
     }
@@ -128,13 +126,12 @@ const DetailDrawer = props => {
 
   const onCreate = async () => {
     try {
-      console.log('-onCreate--')
       onClose()
       dispatchTaskData({ type: DATA_STATE.reload })
 
       const url = 'http://localhost:5173/api/task-list'
 
-      const res = await fetch(url, {
+      await fetch(url, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -146,7 +143,6 @@ const DetailDrawer = props => {
           'create-date': null,
         }),
       })
-      console.log('---create', res)
     } catch (err) {
       console.error(err)
     }
@@ -165,10 +161,6 @@ const DetailDrawer = props => {
     }
   }
 
-  // todo! create and edit form validation!
-  // console.log('--DetailDrawer-render-', date)
-  // console.log('--DetailDrawer-dateError-', dateError)
-  // console.log('--DetailDrawer-descError-', descError)
 
   return (
     <Drawer
