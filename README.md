@@ -10,7 +10,7 @@ Run the app locally:
   - The query string **mock=true** is used to activate mock server.
   - Mock sever: [Mirage.js](https://miragejs.com/docs/getting-started/introduction/) (using in-memory database)
   - Working principle: 
-    - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests you js app makes and lets you mock the response.
+    - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
 
 ## Overview
 The app demonstrate **creating/editing/deleting**  actions of tasks and has some features:
@@ -27,11 +27,11 @@ The app demonstrate **creating/editing/deleting**  actions of tasks and has some
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
       3. `POST` http://localhost:5173/api/task-list
 2. Task form fields:
-   - name: `string`
-   - description: `string`
-   - date: `string` (ISO date format)
+   - name: `string`, `required`
+   - description: `string`, `required`
+   - date: `string`, `required`, (ISO date format)
 3. Third-party libraries used:
    1. [React Router v6](https://reactrouter.com/en/main/start/overview)
    2. [Material UI](https://mui.com/)
-   3. [Mirage](https://miragejs.com/docs/getting-started/introduction/)
-   4. [Faker](https://fakerjs.dev/)
+   3. [Mirage](https://miragejs.com/docs/getting-started/introduction/) (mock server)
+   4. [Faker](https://fakerjs.dev/) (mock data generator)
