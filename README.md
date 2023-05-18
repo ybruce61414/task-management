@@ -1,5 +1,5 @@
 # Task Management
-The project is set up by `create vite`, and crafted in React.
+The project is set up by `create vite`.
 
 ## Quick Start
 Run the app locally:
