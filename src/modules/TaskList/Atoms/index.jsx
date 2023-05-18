@@ -101,10 +101,13 @@ TaskContent.propTypes = {
 }
 
 ScrollContent.propTypes = {
-  children: PropTypes.oneOf([
+  children: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.element,
-  ].isRequired),
+  ]),
+}
+ScrollContent.defaultProps = {
+  children: <></>
 }
 
 ScrollContainer.propTypes = {

@@ -1,6 +1,6 @@
 import { ROUTES_CONFIG } from './const.js'
 import TaskList from '../modules/TaskList'
-import App from '../modules/LandingView/App.jsx'
+import App from '../modules/LandingView'
 import LoadingOverlay from '../components/LoadingOverlay'
 import ViewDetail from '../modules/TaskList/ViewDetail/index.jsx'
 import Middlewares, { MiddlewareHOC } from './Middlewares/index.jsx'
