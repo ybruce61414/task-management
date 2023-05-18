@@ -16,12 +16,12 @@ Run the app locally:
 The app demonstrate **creating/editing/deleting**  actions of tasks and has some features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
 2. The view list handles large amount of fetching data using **infinite scroll**.
-3. **Throttling** scroll event
+3. Optimizing scroll handler by using **Throttling**.
 
 
 
 ## Specs
-1. API spec assumptions (with mock server):
+1. API spec assumptions (implemented by mock server):
    - Tasks
       1. `GET` http://localhost:5173/api/task-list
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
