@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useTasksContext } from '../contexts/contextStore.jsx'
-import { DATA_STATE } from '../reducers/index.jsx'
+import { useTasksContext } from '../../contexts/contextStore.jsx'
+import { DATA_STATE } from '../../reducers/index.jsx'
+import { processApiData } from '../../modules/TaskList/utils.js'
 
 
 const useFetchTasks = () => {
@@ -13,10 +14,9 @@ const useFetchTasks = () => {
       const res = await fetch('http://localhost:5173/api/task-list')
       const finalRes = await res.json()
 
-
       dispatchTaskData({
         type: DATA_STATE.ready,
-        value: finalRes.data || [],
+        value: processApiData(finalRes.data),
       })
     } catch (err) {
       console.error(err)

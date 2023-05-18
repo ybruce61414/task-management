@@ -1,0 +1,32 @@
+# Task Management
+The project is set up by `create vite`.
+
+## Quick Start
+Run the app locally:
+1. `yarn install`
+2. `yarn dev`
+3. open with [http://localhost:5173/task-list?mock=true]()
+- Note:
+  - The query string **mock=true** is used to activate mock server.
+  - Mock sever: [Mirage.js](https://miragejs.com/docs/getting-started/introduction/) (using in-memory database)
+  - Working principle: 
+    - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests you js app makes and lets you mock the response.
+
+## Overview
+The app demonstrate **creating/editing/deleting**  actions of tasks and has some features:
+1. The app uses to make network request instead of mocking code coupling in codebase.
+2. The view list handles large amount of fetching data using **infinite scroll**.
+3. **Throttling** scroll event
+
+
+
+## Specs
+1. API spec assumptions (with mock server):
+   - Tasks
+      1. `GET` http://localhost:5173/api/task-list
+      2. `PATCH` http://localhost:5173/api/task-list/{taskId}
+      3. `POST` http://localhost:5173/api/task-list
+2. Task form fields:
+   - name: `string`
+   - description: `string`
+   - date: `string` (ISO date format)

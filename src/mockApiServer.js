@@ -23,11 +23,12 @@ export default function () {
       //     'create-date': null,
       //   })
       // })
-      const count = 10
+      const count = 10000
 
       for (let i = 0; i < count; i++) {
         server.create('task', {
-          taskId: faker.number.hex({ min: 10, max: 5000 }),
+          // taskId: faker.number.hex({ min: 10, max: 5000 }),
+          taskId: faker.string.uuid(),
           name: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
           // format: '2022-07-31T01:33:29.567Z'
@@ -40,7 +41,7 @@ export default function () {
       // url
       const taskListUrl = '/api/task-list'
 
-      // methods:
+      // http methods:
       // get tasks
       this.get(taskListUrl, (schema) => {
         // return mockTasks
@@ -66,7 +67,6 @@ export default function () {
       this.post(`${taskListUrl}`, (schema, request) => {
         const payload = JSON.parse(request.requestBody)
         const taskId = faker.number.hex({ min: 100, max: 300 })
-
         const newPayload = { ...payload, taskId }
 
         return schema.tasks.create(newPayload)

@@ -34,8 +34,9 @@ const CustomCard = props => {
     name,
     description,
     date,
+    order,
   } = data
-
+  // order is an additional info
 
   const navigate = useNavigate()
   const { dispatchTaskData } = useTasksContext()
@@ -93,6 +94,7 @@ const CustomCard = props => {
       maxWidth: 430,
       minWidth: 430,
       height: 240,
+      boxSizing: 'borer-box',
       margin: '20px 0',
       borderLeft: '3px solid #f44337',
     }}>
@@ -109,7 +111,8 @@ const CustomCard = props => {
           }}
             aria-label="task-number"
           >
-            {taskId}
+            {/*{taskId}*/}
+            {order}
           </Avatar>
         }
         action={

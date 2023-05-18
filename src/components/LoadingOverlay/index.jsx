@@ -1,6 +1,6 @@
 import { Backdrop, CircularProgress } from '@mui/material'
 
-const LoadingFallback = () => {
+const LoadingOverlay = () => {
   return (
     <Backdrop
       sx={{
@@ -14,4 +14,4 @@ const LoadingFallback = () => {
   )
 }
 
-export default LoadingFallback
+export default LoadingOverlay

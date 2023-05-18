@@ -6,7 +6,7 @@ import {
 } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { genRouteConfigs } from '../../routes/config.jsx'
-import LoadingFallback from '../LoadingFallback.jsx'
+import LoadingOverlay from '../LoadingOverlay/index.jsx'
 import styles from './styles.module.scss'
 import TasksProvider from '../../contexts/providers/TasksProvider.jsx'
 import { LocalizationProvider } from '@mui/x-date-pickers'
@@ -34,7 +34,7 @@ const EntryContainer = () => {
           <TasksProvider>
             <RouterProvider
               router={router}
-              fallbackElement={<LoadingFallback />}
+              fallbackElement={<LoadingOverlay />}
             />
           </TasksProvider>
         </LocalizationProvider>

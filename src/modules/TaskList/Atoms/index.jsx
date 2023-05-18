@@ -3,17 +3,30 @@ import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
+import { forwardRef } from 'react'
 
 // simple components will be collected here
-
-export const ScrollContainer = props => {
+export const TaskContent = props => {
   const { children, ...otherProps } = props
   return (
-    <div className={styles.ScrollContainer} {...otherProps}>
+    <section className={styles.content} {...otherProps}>
+      {children}
+    </section>
+  )
+}
+
+export const ScrollContainer = forwardRef((props, ref) => {
+  const { children, ...otherProps } = props
+  return (
+    <div
+      className={styles.ScrollContainer}
+      {...otherProps}
+      ref={ref}
+    >
       {children}
     </div>
   )
-}
+})
 
 export const ScrollContent = props => {
   const { children, ...otherProps } = props
@@ -35,12 +48,12 @@ export const TaskHeader = () => {
 
 
 export const ItemCount = props => {
-  const { visible: { from, to } } = props
+  const { total, visible: { from, to } } = props
 
   return (
     <div className={styles['item-count']}>
-      Total Items: 1000
-      <div className={styles.visible}>{from + 1}-{to + 1}</div>
+      {`Total: ${total}`}
+      <div className={styles.visible}>{from + 1}-{to}</div>
     </div>
   )
 }
@@ -65,8 +78,12 @@ export const CreateBtn = props => {
 
 
 // propTypes
+TaskContent.propTypes = {
+  children: PropTypes.array.isRequired,
+}
+
 ScrollContent.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.array.isRequired,
 }
 
 ScrollContainer.propTypes = {
@@ -79,4 +96,10 @@ CreateBtn.propTypes = {
 
 ItemCount.propTypes = {
   visible: PropTypes.object,
+  total: PropTypes.number,
 }
+ItemCount.defaultProps = {
+  total: 0
+}
+
+ScrollContainer.displayName = 'ScrollContainer'

@@ -1,7 +1,7 @@
 import { ROUTES_CONFIG } from './const.js'
 import TaskList from '../modules/TaskList'
 import App from '../App.jsx'
-import LoadingFallback from '../components/LoadingFallback.jsx'
+import Index from '../components/LoadingOverlay/index.jsx'
 import ViewDetail from '../modules/TaskList/ViewDetail/index.jsx'
 
 // todo: need middleware
@@ -21,7 +21,7 @@ export const genRouteConfigs = () => {
     },
     {
       path: '*',
-      element: <LoadingFallback />
+      element: <Index />
     },
   ]
 }

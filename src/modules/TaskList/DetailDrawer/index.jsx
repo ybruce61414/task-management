@@ -1,12 +1,12 @@
-import { Box, Drawer, styled } from '@mui/material'
+import { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { Box, Drawer, styled } from '@mui/material'
 import FormBody from '../../../components/Form/FormBody.jsx'
 import FormHeader from '../../../components/Form/FormHeader.jsx'
 import FormAction from '../../../components/Form/FormAction.jsx'
 import useTextInput from '../../../components/Form/hooks/useTextInput.jsx'
 import { DATA_STATE } from '../../../reducers/index.jsx'
 import { useTasksContext } from '../../../contexts/contextStore.jsx'
-import { useMemo } from 'react'
 import useCalendarInput from '../../../components/Form/hooks/useCalendarInput.jsx';
 
 
@@ -23,6 +23,7 @@ const DrawerLayout = styled(Box)`
   width: 460px;
   height: 100vh;
 `
+
 const DetailDrawer = props => {
   const { dispatchTaskData } = useTasksContext()
   const {
@@ -40,8 +41,6 @@ const DetailDrawer = props => {
   } = data
 
   const mode = getMode(data)
-  console.log('---mode', mode)
-
   const headerTitle = useMemo(() => {
     switch (mode) {
       case 'create':
@@ -54,6 +53,7 @@ const DetailDrawer = props => {
   }, [mode])
 
 
+  // form fields
   const {
     Component: NameField,
     inputValue: nameValue,
@@ -99,6 +99,7 @@ const DetailDrawer = props => {
     nameError.value || descError.value || dateError.value
   )
 
+  // callbacks
   const onEdit = async () => {
     try {
       console.log('-onEdit--')
@@ -164,9 +165,9 @@ const DetailDrawer = props => {
   }
 
   // todo! create and edit form validation!
-  console.log('--DetailDrawer-render-', date)
-  console.log('--DetailDrawer-dateError-', dateError)
-  console.log('--DetailDrawer-descError-', descError)
+  // console.log('--DetailDrawer-render-', date)
+  // console.log('--DetailDrawer-dateError-', dateError)
+  // console.log('--DetailDrawer-descError-', descError)
 
   return (
     <Drawer
@@ -187,12 +188,6 @@ const DetailDrawer = props => {
           {NameField}
           {DescriptionField}
           {CalendarField}
-          {/*<CustomDatePicker*/}
-          {/*  label="Controlled picker"*/}
-          {/*  margin="normal"*/}
-          {/*  defaultValue={dayjs(date)}*/}
-          {/*  onChange={() => {}}*/}
-          {/*/>*/}
         </FormBody>
         <FormAction
           onSubmit={onSubmit}
