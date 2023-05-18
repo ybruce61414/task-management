@@ -1,5 +1,5 @@
 # Task Management
-The project is set up by `create vite`.
+The project is set up by `create vite` in React.
 
 ## Quick Start
 Run the app locally:
@@ -30,3 +30,8 @@ The app demonstrate **creating/editing/deleting**  actions of tasks and has some
    - name: `string`
    - description: `string`
    - date: `string` (ISO date format)
+3. Third-party libraries used:
+   1. [React Router v6](https://reactrouter.com/en/main/start/overview)
+   2. [Material UI](https://mui.com/)
+   3. [Mirage](https://miragejs.com/docs/getting-started/introduction/)
+   4. [Faker](https://fakerjs.dev/)
