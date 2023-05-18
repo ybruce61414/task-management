@@ -13,7 +13,12 @@ const CardSection = props => {
     ITEM_HEIGHT,
   } = props
 
-  if (taskData.state === DATA_STATE.ready) {
+  console.log('--taskData-', taskData)
+
+  if ([
+    DATA_STATE.ready,
+    DATA_STATE.reload,
+  ].includes(taskData.state)) {
     if (taskData.value?.length > 0) {
       // drawing cards
       return (

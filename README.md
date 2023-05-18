@@ -6,24 +6,20 @@ Run the app locally:
 1. `yarn install`
 2. `yarn dev`
 3. open with [http://localhost:5173/task-list?mock=true]()
-- Note:
-  - The query string **mock=true** is used to activate mock server.
-  - Mock sever: [Mirage.js](https://miragejs.com/docs/getting-started/introduction/) (using in-memory database)
-  - Working principle: 
-    - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
+- Note: the *query string* **mock=true** is used to activate mock server.
 
 ## Overview
-The app demonstrate **creating/editing/deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
+The app demonstrates **creating/editing/deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
 They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
-2. The view list handles large amount of fetching data using **infinite scroll**.
+2. The view list handles large amount of fetching data with no pagination using **infinite scroll**.
 3. Optimizing scroll handler by using **throttle**.
 
 
 
 ## Specs
-1. API spec assumptions (implemented by mock server):
+1. API spec assumptions from mock server:
    - Tasks
       1. `GET` http://localhost:5173/api/task-list
          > ```json
@@ -40,6 +36,9 @@ Additionally, the app has some key features:
          > ```
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
       3. `POST` http://localhost:5173/api/task-list
+   - Mock sever: [Mirage.js](https://miragejs.com/docs/getting-started/introduction/) (using in-memory database)
+   - Working principle:
+     - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
 2. Task form fields:
     -   | Field | Data type | Required |     Format      |
         |:----------|:---------|:---------------:|:----: |

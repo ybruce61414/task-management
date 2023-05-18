@@ -10,29 +10,15 @@ export default function () {
       task: Model,
     },
     seeds(server) {
-
-      // mockTasks.data.forEach(task => {
-      //   server.create('task', {
-      //     ...task,
-      //     taskId: faker.number.hex({ min: 10, max: 100 }),
-      //     name: faker.commerce.productName(),
-      //     description: faker.commerce.productDescription(),
-      //     // priority: faker.number.int(),
-      //     // format: '2022-07-31T01:33:29.567Z'
-      //     date: faker.date.anytime(),
-      //     'create-date': null,
-      //   })
-      // })
       const count = 10000
 
       for (let i = 0; i < count; i++) {
+        // date format: '2022-07-31T01:33:29.567Z'
         server.create('task', {
           taskId: faker.string.uuid(),
           name: faker.commerce.productName(),
           description: faker.commerce.productDescription(),
-          // format: '2022-07-31T01:33:29.567Z'
           date: faker.date.anytime(),
-          'create-date': null,
         })
       }
     },
