@@ -27,15 +27,14 @@ Additionally, the app has some key features:
    - Tasks
       1. `GET` http://localhost:5173/api/task-list
          > ```json
-         > // 200 responses:
          > {
-         >    data: [
+         >    "data": [
          >      {
          >        "taskId": "1",
          >        "name": "pricer",
          >        "description": "assignment is cool",
          >        "date": "2022-07-31T01:33:29.567Z"
-         >      },
+         >      }
          >    ]
          > }
          > ```
