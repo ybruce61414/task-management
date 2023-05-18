@@ -27,7 +27,6 @@ export default function () {
 
       for (let i = 0; i < count; i++) {
         server.create('task', {
-          // taskId: faker.number.hex({ min: 10, max: 5000 }),
           taskId: faker.string.uuid(),
           name: faker.commerce.productName(),
           description: faker.commerce.productDescription(),

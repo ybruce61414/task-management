@@ -1,5 +1,5 @@
 # Task Management
-The project is set up by `create vite` in React.
+The project is set up by `create vite`, and crafted in React.
 
 ## Quick Start
 Run the app locally:
@@ -13,7 +13,8 @@ Run the app locally:
     - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
 
 ## Overview
-The app demonstrate **creating/editing/deleting**  actions of tasks. A task has 3 required input fields (*name*, *description*, *date*) and sorted by date. 
+The app demonstrate **creating/editing/deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
+They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
 2. The view list handles large amount of fetching data using **infinite scroll**.
@@ -25,6 +26,19 @@ Additionally, the app has some key features:
 1. API spec assumptions (implemented by mock server):
    - Tasks
       1. `GET` http://localhost:5173/api/task-list
+         > ```json
+         > // 200 responses:
+         > {
+         >    data: [
+         >      {
+         >        "taskId": "1",
+         >        "name": "pricer",
+         >        "description": "assignment is cool",
+         >        "date": "2022-07-31T01:33:29.567Z"
+         >      },
+         >    ]
+         > }
+         > ```
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
       3. `POST` http://localhost:5173/api/task-list
 2. Task form fields:
@@ -36,3 +50,4 @@ Additionally, the app has some key features:
    2. [Material UI](https://mui.com/)
    3. [Mirage](https://miragejs.com/docs/getting-started/introduction/) (mock server)
    4. [Faker](https://fakerjs.dev/) (mock data generator)
+
