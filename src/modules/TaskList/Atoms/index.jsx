@@ -19,7 +19,7 @@ export const ScrollContainer = forwardRef((props, ref) => {
   const { children, ...otherProps } = props
   return (
     <div
-      className={styles.ScrollContainer}
+      className={styles['scroll-container']}
       {...otherProps}
       ref={ref}
     >
@@ -51,9 +51,11 @@ export const ItemCount = props => {
   const { total, visible: { from, to } } = props
 
   return (
-    <div className={styles['item-count']}>
-      {`Total: ${total}`}
-      <div className={styles.visible}>{from + 1}-{to}</div>
+    <div className={styles['item-count-wrapper']}>
+      <div className={styles['item-count']}>
+        {`Total: ${total}`}
+        <div className={styles.visible}>{from + 1}-{to}</div>
+      </div>
     </div>
   )
 }
@@ -62,7 +64,7 @@ export const CreateBtn = props => {
   const { onCreate } = props
 
   return (
-    <section className={styles.createBtn}>
+    <section className={styles['create-button']}>
       <IconButton
         sx={{ backgroundColor: 'rgb(0,191,255, 0.6)' }}
         onClick={onCreate}

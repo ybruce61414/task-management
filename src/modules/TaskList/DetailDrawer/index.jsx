@@ -20,7 +20,8 @@ const getMode = detailData => {
 }
 
 const DrawerLayout = styled(Box)`
-  width: 460px;
+  width: 100%;
+  max-width: 460px;
   height: 100vh;
 `
 

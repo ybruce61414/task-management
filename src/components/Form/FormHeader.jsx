@@ -6,7 +6,7 @@ const FormHeader = props => {
   const { title } = props
 
   return (
-    <div className={styles.formHeader}>
+    <div className={styles['form-header']}>
       <Typography variant="h5">
         {title}
       </Typography>

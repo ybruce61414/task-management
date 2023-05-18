@@ -13,10 +13,11 @@ Run the app locally:
     - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
 
 ## Overview
-The app demonstrate **creating/editing/deleting**  actions of tasks and has some features:
+The app demonstrate **creating/editing/deleting**  actions of tasks. A task has 3 required input fields (*name*, *description*, *date*) and sorted by date. 
+Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
 2. The view list handles large amount of fetching data using **infinite scroll**.
-3. Optimizing scroll handler by using **Throttling**.
+3. Optimizing scroll handler by using **throttle**.
 
 
 

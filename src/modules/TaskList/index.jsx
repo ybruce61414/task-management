@@ -35,7 +35,7 @@ const TaskList = () => {
   const isLoading = isFetching || taskData.state === DATA_STATE.reload
 
   // ref
-  const container = useRef()
+  const container = useRef({})
 
   // callbacks
   const onOpenDrawer = useCallback(() => {
@@ -90,7 +90,7 @@ const TaskList = () => {
     visible.viewTo
   ])
 
-  const throttleOnScroll = throttle(handleOnScroll, 700)
+  const throttleOnScroll = throttle(handleOnScroll, 300)
 
   useEffect(() => {
     if (taskData.state === DATA_STATE.ready) {

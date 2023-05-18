@@ -10,9 +10,9 @@ const FormAction = props => {
   const { onSubmit, onCancel, error } = props
 
   return (
-    <div className={styles.formActionBar}>
+    <div className={styles['for-action-bar']}>
       <Stack
-        sx={{width: '100%', padding: '0 20px'}}
+        sx={{ width: '100%', padding: '0 20px' }}
         spacing={2}
         direction="row-reverse"
       >

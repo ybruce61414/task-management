@@ -91,8 +91,9 @@ const CustomCard = props => {
 
   return (
     <Card sx={{
-      maxWidth: 430,
-      minWidth: 430,
+      // maxWidth: 430,
+      // minWidth: 430,
+      width: '90%',
       height: 240,
       boxSizing: 'borer-box',
       margin: '20px 0',

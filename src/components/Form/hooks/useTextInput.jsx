@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { styled, TextField } from '@mui/material'
 import { transFormFieldError } from '../../../modules/TaskList/utils.js'
+import { validator } from '../utils.js'
 
 const CustomTextField = styled(TextField)`
-  width: 300px
+  box-sizing: border-box;
+  width: 300px;
+  margin: 10px 25px;
 `
 
 const initError = {
@@ -28,33 +31,27 @@ const useTextInput = props => {
   const [value, setValue] = useState(initValue)
   const [error, setError] = useState(initError)
 
+
   const onChange= event => {
     const input = event.target.value
 
-
-    // todo: extract validator
-    if (required) {
-      if (input === '') {
-        if (error.isDirty) {
-          setError({...error, value: 'required'})
-        } else {
-          setError({
-            ...error, isDirty: true, value: 'required'})
-        }
-      } else {
-        setError({
-          ...error,
-          isDirty: true,
-          value: error.value? '': error.value,
-        })
-      }
-    }
+    validator({
+      required,
+      input,
+      error,
+      errorSetter: setError,
+    })
     setValue(input)
   }
 
   const onBlur = () => {
-    // implement validation
-    console.log('---onBlur', value)
+    // trigger validation when onBlur
+    validator({
+      required,
+      input: value,
+      error,
+      errorSetter: setError,
+    })
   }
 
 
@@ -72,7 +69,7 @@ const useTextInput = props => {
         console.error('unknown mode')
     }
 
-    //  reset value when close drawer
+    // reset value when close drawer
     // prevent init render(react 18 render twice)
     effectCalledCount.current += 1
     if (effectCalledCount.current > 2) {
