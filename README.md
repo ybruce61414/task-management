@@ -41,9 +41,11 @@ Additionally, the app has some key features:
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
       3. `POST` http://localhost:5173/api/task-list
 2. Task form fields:
-   - **name**: `string`, `required`
-   - **description**: `string`, `required`
-   - **date**: `string`, `required`, (ISO date format)
+   -    | Field | Data type | Required | Format |
+        |:----------|:---------|:------:|:----: |
+        | name | `string`  | `true`   |   -    |
+        | description | `string`  | `true`     |   -    |
+   -    | date | `string`  | `true`     |  ISO date format   |
 3. Third-party libraries used:
    1. [React Router v6](https://reactrouter.com/en/main/start/overview)
    2. [Material UI](https://mui.com/)
