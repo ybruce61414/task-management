@@ -5,7 +5,7 @@ The project is set up by `create vite`.
 Run the app locally:
 1. `yarn install`
 2. `yarn dev`
-3. open with [http://localhost:5173/task-list?mock=true]()
+3. open with [http://localhost:5173/task-list?mock=true](http://localhost:5173/task-list?mock=true)
 - Note: the *query string* **mock=true** is used to activate mock server.
 
 ## Overview
