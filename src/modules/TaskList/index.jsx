@@ -12,6 +12,7 @@ import {
   ItemCount,
   ScrollContent,
   TaskContent,
+  ScrollTopBtn,
 } from './Atoms'
 import { DATA_STATE } from '../../reducers/index.jsx'
 import { throttle } from './utils.js'
@@ -34,8 +35,12 @@ const TaskList = () => {
   const { isFetching, rawData: taskData } = useFetchTasks()
   const isLoading = isFetching || taskData.state === DATA_STATE.reload
 
-  // ref
+  // refs
+  // for scroll container
   const container = useRef({})
+
+  // for top element
+  // const topElementRef = useRef(null)
 
   // callbacks
   const onOpenDrawer = useCallback(() => {
@@ -56,6 +61,14 @@ const TaskList = () => {
     onOpenDrawer()
   }, [onOpenDrawer])
 
+  // const onScrollTop = useCallback(() => {
+  //   // todo: only anchor the first render element
+  //   topElementRef.current?.scrollIntoView({
+  //     behavior: 'instant',
+  //     block: 'end',
+  //     inline: 'start'
+  //   })
+  // }, [topElementRef.current])
 
 
   // infinite scroll
@@ -119,10 +132,12 @@ const TaskList = () => {
               visible={visible}
               toggleDetail={toggleDetail}
               ITEM_HEIGHT={ITEM_HEIGHT}
+              // externalRef={topElementRef}
             />
           </ScrollContent>
         </ScrollContainer>
         <CreateBtn onCreate={toggleCreate} />
+        {/*<ScrollTopBtn onTop={onScrollTop} />*/}
       </TaskContent>
       {taskData.state === DATA_STATE.ready && (
         <DetailDrawer

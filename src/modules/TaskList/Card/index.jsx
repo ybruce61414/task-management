@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
@@ -27,7 +27,7 @@ const CustomTypography = styled(Typography)`
   white-space: pre-wrap;
 `
 
-const CustomCard = props => {
+const CustomCard = forwardRef((props, ref) => {
   const { data, toggleDetail } = props
   const {
     taskId,
@@ -86,12 +86,14 @@ const CustomCard = props => {
 
 
   return (
-    <Card sx={{
-      width: '90%',
-      height: 240,
-      boxSizing: 'borer-box',
-      margin: '20px 0',
-      borderLeft: '3px solid #f44337',
+    <Card
+      ref={ref}
+      sx={{
+        width: '90%',
+        height: 240,
+        boxSizing: 'borer-box',
+        margin: '20px 0',
+        borderLeft: '3px solid #f44337',
     }}>
       <CardHeader
         style={{
@@ -141,12 +143,12 @@ const CustomCard = props => {
       </CardContent>
     </Card>
   )
-}
+})
 
 CustomCard.propTypes = {
   data: PropTypes.object.isRequired,
   toggleDetail: PropTypes.func
 }
 
-
+CustomCard.displayName = 'CustomCard'
 export default CustomCard

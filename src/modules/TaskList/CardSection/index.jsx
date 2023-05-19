@@ -11,9 +11,9 @@ const CardSection = props => {
     visible,
     toggleDetail,
     ITEM_HEIGHT,
+    externalRef,
   } = props
 
-  console.log('--taskData-', taskData)
 
   if ([
     DATA_STATE.ready,
@@ -32,6 +32,7 @@ const CardSection = props => {
               return (
                 <CustomCard
                   data={card}
+                  ref={idx === 0? externalRef: null}
                   key={`card-${card?.taskId ?? idx}`}
                   toggleDetail={toggleDetail}
                 />
@@ -58,5 +59,10 @@ CardSection.propTypes = {
   visible: PropTypes.object,
   toggleDetail: PropTypes.func,
   ITEM_HEIGHT: PropTypes.number,
+  externalRef: PropTypes.object,
+}
+
+CardSection.defaultProps = {
+  externalRef: {}
 }
 export default CardSection

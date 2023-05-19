@@ -43,7 +43,7 @@ function App() {
           margin: 0,
           textAlign: 'center'
         }}>
-          <code>crafted by Viola</code>
+          <code>Crafted by Viola</code>
         </p>
       </div>
       <div className="card">

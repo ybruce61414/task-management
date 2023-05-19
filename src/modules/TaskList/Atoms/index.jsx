@@ -1,6 +1,7 @@
 import styles from '../styles.module.scss'
 import IconButton from '@mui/material/IconButton'
 import AddIcon from '@mui/icons-material/Add'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import PropTypes from 'prop-types'
 import Typography from '@mui/material/Typography'
 import { forwardRef } from 'react'
@@ -76,6 +77,22 @@ export const CreateBtn = props => {
     </section>
   )
 }
+export const ScrollTopBtn = props => {
+  const { onTop } = props
+
+  return (
+    <section className={styles['scroll-to-top-button']}>
+      <IconButton
+        sx={{ backgroundColor: 'rgb(0,191,255, 0.6)' }}
+        onClick={onTop}
+        size="large"
+        aria-label="more-btn"
+      >
+        <KeyboardArrowUpIcon />
+      </IconButton>
+    </section>
+  )
+}
 
 export const NoData = () => {
   return (
@@ -116,6 +133,10 @@ ScrollContainer.propTypes = {
 
 CreateBtn.propTypes = {
   onCreate: PropTypes.func,
+}
+
+ScrollTopBtn.propTypes = {
+  onTop: PropTypes.func,
 }
 
 ItemCount.propTypes = {

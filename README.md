@@ -40,11 +40,11 @@ Additionally, the app has some key features:
    - Working principle:
      - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
 2. Task form fields:
-    -   | Field | Data type | Required |     Format      |
-        |:----------|:---------|:---------------:|:----: |
-        | name | `string`  | `true`   |      -          |
-        | description | `string`  | `true`     |        -        |
-        | date | `string`  | `true`     | ISO date format |
+    -   | Field | Data type | Required |     Format      | Limit         |
+        |:----------|:---------|:---------------:|:--------------|   :-----      |
+        | name | `string`  | `true`   |        -        | maxLength=300 |
+        | description | `string`  | `true`     |        -        | maxLength=300 |
+        | date | `string`  | `true`     | ISO date format | -             |
 3. Third-party libraries used:
    1. [React Router v6](https://reactrouter.com/en/main/start/overview)
    2. [Material UI](https://mui.com/)

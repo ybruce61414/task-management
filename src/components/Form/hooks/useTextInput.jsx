@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { styled, TextField } from '@mui/material'
 import { transFormFieldError } from '../../../modules/TaskList/utils.js'
-import { validator } from '../utils.js'
+import { maxLengthFilter, validator } from '../utils.js'
 
 const CustomTextField = styled(TextField)`
   box-sizing: border-box;
@@ -21,6 +21,7 @@ const useTextInput = props => {
     mode,
     name,
     isOpen,
+    maxlength = 500,
     initValue = '',
     fieldProps = {},
   } = props
@@ -33,7 +34,7 @@ const useTextInput = props => {
 
 
   const onChange= event => {
-    const input = event.target.value
+    let input = maxLengthFilter(event.target.value, maxlength)
 
     validator({
       required,
@@ -54,10 +55,9 @@ const useTextInput = props => {
     })
   }
 
-
   useEffect(() => {
     // set drilling detail
-    setValue(initValue)
+    setValue(maxLengthFilter(initValue, maxlength))
     switch (mode) {
       case 'edit':
         setError({ mode, value: '' })

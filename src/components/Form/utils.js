@@ -23,3 +23,7 @@ export const validator = props => {
     }
   }
 }
+
+export const maxLengthFilter = (input, maxLength) => {
+  return input.slice(0, maxLength)
+}
