@@ -39,3 +39,39 @@ export const dateFormatter = (year, month, date) => {
 
   return `${MONTHS[month]} ${date}, ${year}`
 }
+
+
+export const STATUS_CODES = {
+  success: '200',
+  createdSuccess: '201',
+  badRequest: '400',
+  notFound: '404',
+  internalServerError: '500',
+};
+
+export const httpError = {
+  400: {
+    'error': {
+      'code': 'Bad Request',
+      'message': 'Bad Request'
+    }
+  },
+  401: {
+    'error': {
+      'code': 'Unauthorized',
+      'message': 'Unauthorized'
+    }
+  },
+  404: {
+    'error': {
+      'code': 'Not Found',
+      'message': 'Not Found'
+    }
+  },
+  500: {
+    'error': {
+      'code': 'Internal Server Error',
+      'message': 'Internal Server Error'
+    }
+  },
+}

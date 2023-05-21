@@ -12,14 +12,17 @@ import {
   ItemCount,
   ScrollContent,
   TaskContent,
-  ScrollTopBtn,
+  // ScrollTopBtn,
 } from './Atoms'
 import { DATA_STATE } from '../../reducers/index.jsx'
 import { throttle } from './utils.js'
 import CardSection from './CardSection/index.jsx'
 
+
 const ITEM_HEIGHT = 240 + 40
 const BUFFER_UNIT = 10
+
+
 
 const TaskList = () => {
   // useEffect to fetch data

@@ -20,7 +20,7 @@ export const apiDataReducer = initValue => (state, action) => {
     case DATA_STATE.ready:
       return { state: DATA_STATE.ready, value: action.value }
     case DATA_STATE.failed:
-      return { state: DATA_STATE.failed, value: [] }
+      return { state: DATA_STATE.failed, value: action.value || [] }
     default:
       throw new Error('unknown action type')
   }

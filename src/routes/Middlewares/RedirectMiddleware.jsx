@@ -20,7 +20,7 @@ const RedirectMiddleware = props => {
   }
 
   // when inner routing, trigger mock server
-  if (queryMap.mock === 'true') makeMockServer()
+  if (queryMap.mock === 'true') makeMockServer(queryMap)
 
   return <>{children}</>
 }

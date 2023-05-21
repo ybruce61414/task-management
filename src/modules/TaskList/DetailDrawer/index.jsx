@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import { enqueueSnackbar } from 'notistack'
 import { Box, Drawer, styled } from '@mui/material'
 import FormBody from '../../../components/Form/FormBody.jsx'
 import FormHeader from '../../../components/Form/FormHeader.jsx'
@@ -108,7 +109,7 @@ const DetailDrawer = props => {
 
       const url = `http://localhost:5173/api/task-list/${taskId}`
 
-      await fetch(url, {
+      const res = await fetch(url, {
         method: 'PATCH',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -119,6 +120,25 @@ const DetailDrawer = props => {
           date: dateValue,
         }),
       })
+
+      switch (res.status) {
+        case 400:
+        case 500: {
+          dispatchTaskData({
+            type: DATA_STATE.failed,
+            value: res.statusText,
+          })
+          enqueueSnackbar(res.statusText, { variant: 'error' })
+          break
+        }
+        case 200:
+        case 201:
+          enqueueSnackbar('edited successfully', { variant: 'success' })
+          break
+        default:
+          break
+      }
+
     } catch (err) {
       console.error(err)
     }
@@ -131,7 +151,7 @@ const DetailDrawer = props => {
 
       const url = 'http://localhost:5173/api/task-list'
 
-      await fetch(url, {
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
@@ -143,6 +163,24 @@ const DetailDrawer = props => {
           'create-date': null,
         }),
       })
+
+      switch (res.status) {
+        case 400:
+        case 500: {
+          dispatchTaskData({
+            type: DATA_STATE.failed,
+            value: res.statusText,
+          })
+          enqueueSnackbar(res.statusText, { variant: 'error' })
+          break
+        }
+        case 200:
+        case 201:
+          enqueueSnackbar('created successfully', { variant: 'success' })
+          break
+        default:
+          break
+      }
     } catch (err) {
       console.error(err)
     }

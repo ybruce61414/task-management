@@ -113,6 +113,7 @@
       7. Throttle and Debounce
    2. Techniques I used:
       1. Using dynamic import and bundle the whole app using webpack.
-      2. Infinite scroll with throttle.
-      3. Using Redux to optimize rendering mechanism.
+      2. Using useMemo and memo hook to memoize and cache the results of expensive calculations.
+      3. Infinite scroll with throttle.
+      4. Using Redux to optimize rendering mechanism.
 

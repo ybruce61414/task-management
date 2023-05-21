@@ -1,10 +1,11 @@
-import { createServer, Model } from 'miragejs'
+import {createServer, Model, Response} from 'miragejs'
 import { faker } from '@faker-js/faker'
+import { httpError, STATUS_CODES } from './utils/index.js'
 // import { mockTasks } from './mock/index.js'
 
 
 
-export default function () {
+export default function (query) {
   createServer({
     models: {
       task: Model,
@@ -30,6 +31,36 @@ export default function () {
       // get tasks
       this.get(taskListUrl, (schema) => {
         // return mockTasks
+        const statusCode = query['code']
+        const method = query['method']
+
+        console.log('--externalStatus-', statusCode, method)
+
+        if (method === 'get') {
+          switch (statusCode) {
+            case STATUS_CODES.badRequest:
+              return new Response(
+                400,
+                { prop: 'header' },
+                httpError[STATUS_CODES.badRequest]
+              )
+            case STATUS_CODES.notFound:
+              return new Response(
+                404,
+                { prop: 'header' },
+                httpError[STATUS_CODES.notFound]
+              );
+            case STATUS_CODES.internalServerError:
+              return new Response(
+                500,
+                { prop: 'header' },
+                httpError[STATUS_CODES.internalServerError]
+              )
+            case STATUS_CODES.success:
+            default:
+              return { data: schema.tasks.all().models }
+          }
+        }
         return { data: schema.tasks.all().models }
       }, { timing: 1500 })
 
@@ -42,8 +73,33 @@ export default function () {
 
       // edit task
       this.patch(`${taskListUrl}/:taskId`, (schema, request) => {
+        const statusCode = query['code']
+        const method = query['method']
+
         const taskId = request.params.taskId
         const payload = JSON.parse(request.requestBody)
+
+
+        if (method === 'patch') {
+          switch (statusCode) {
+            case STATUS_CODES.badRequest:
+              return new Response(
+                400,
+                { prop: 'header' },
+                httpError[STATUS_CODES.badRequest]
+              )
+            case STATUS_CODES.internalServerError:
+              return new Response(
+                500,
+                { prop: 'header' },
+                httpError[STATUS_CODES.internalServerError]
+              )
+            case STATUS_CODES.success:
+            default:
+              return schema.tasks.findBy({ taskId }).update({ ...payload })
+          }
+        }
+
 
         return schema.tasks.findBy({ taskId }).update({ ...payload })
       }, { timing: 1000 })

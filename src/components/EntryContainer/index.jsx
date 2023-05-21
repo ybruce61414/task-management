@@ -5,12 +5,14 @@ import {
   ThemeProvider
 } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { SnackbarProvider } from 'notistack'
 import { genRouteConfigs } from '../../routes/config.jsx'
 import LoadingOverlay from '../LoadingOverlay/index.jsx'
 import styles from './styles.module.scss'
 import TasksProvider from '../../contexts/providers/TasksProvider.jsx'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import SnackBarHOC  from '../snackBars/index.jsx'
 
 
 const EntryContainer = () => {
@@ -31,12 +33,19 @@ const EntryContainer = () => {
       <CssBaseline />
       <main className={styles.layout}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <TasksProvider>
-            <RouterProvider
-              router={router}
-              fallbackElement={<LoadingOverlay />}
-            />
-          </TasksProvider>
+          <SnackbarProvider
+            Components={{
+              error: SnackBarHOC('error'),
+              success: SnackBarHOC('success'),
+            }}
+          >
+            <TasksProvider>
+              <RouterProvider
+                router={router}
+                fallbackElement={<LoadingOverlay />}
+              />
+            </TasksProvider>
+          </SnackbarProvider>
         </LocalizationProvider>
       </main>
     </ThemeProvider>
