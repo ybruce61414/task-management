@@ -9,7 +9,7 @@ Run the app locally:
 - Note: the *query string* **mock=true** is used to activate mock server.
 
 ## Overview
-The app demonstrates **creating/editing/deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
+The app demonstrates **creating / editing / deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
 They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
