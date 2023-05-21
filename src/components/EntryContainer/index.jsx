@@ -38,6 +38,7 @@ const EntryContainer = () => {
               error: SnackBarHOC('error'),
               success: SnackBarHOC('success'),
             }}
+            autoHideDuration={1000}
           >
             <TasksProvider>
               <RouterProvider

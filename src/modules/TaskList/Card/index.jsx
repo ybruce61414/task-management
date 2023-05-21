@@ -14,6 +14,7 @@ import ActionGroup from './ActionGroup.jsx'
 import dayjs from 'dayjs'
 import { dateFormatter } from '../../../utils/index.js'
 import { styled } from '@mui/material'
+import {enqueueSnackbar} from "notistack";
 
 
 const CustomTypography = styled(Typography)`
@@ -69,12 +70,30 @@ const CustomCard = forwardRef((props, ref) => {
       handleClose()
       dispatchTaskData({ type: DATA_STATE.reload })
 
-      await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
+      const res = await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json'
         }
       })
+
+      switch (res.status) {
+        case 400:
+        case 500: {
+          dispatchTaskData({
+            type: DATA_STATE.failed,
+            value: res.statusText,
+          })
+          enqueueSnackbar(res.statusText, { variant: 'error' })
+          break
+        }
+        case 200:
+        case 204:
+          enqueueSnackbar('deleted successfully', { variant: 'success' })
+          break
+        default:
+          break
+      }
 
       // await for the resource to be deleted
       // Return response data

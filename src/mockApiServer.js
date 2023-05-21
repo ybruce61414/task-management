@@ -34,8 +34,6 @@ export default function (query) {
         const statusCode = query['code']
         const method = query['method']
 
-        console.log('--externalStatus-', statusCode, method)
-
         if (method === 'get') {
           switch (statusCode) {
             case STATUS_CODES.badRequest:
