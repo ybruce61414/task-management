@@ -84,4 +84,35 @@
 
 
 4. ### Explain the difference between props and state in React. When would you use one over the other?
+   1. props are used to pass data from a parent component to its child components, while state is used to manage and control data within a component itself. Props are read-only and passed from top to bottom, while state is owned and managed by the component and can be changed through specific methods.
+   2. 
+      1. When to use props over state:
+        - Use props when passing data or behavior from a parent component to a child component.
+        -   Props are useful for creating reusable and configurable components, as they allow you to customize the child component's behavior and appearance based on the parent's needs.
+        - Props provide a clear separation of concerns, making it easier to reason about and test components independently.
+      2. When to use state over props:
+         - Use state when you need to manage and update data within a component itself.
+         - State is used to handle component-specific data that can change over time, such as user input, toggling UI elements, or maintaining component-specific state.
+         - State allows the component to maintain its own internal state and triggers re-rendering when it changes.
 5. ### How would you optimize the performance of a React application? Can you provide some examples of techniques you might use?
+   1. The ways to optimize the performance:
+      1. Optimize expensive calculations:
+         - Use useMemo or React.memo to memoize and cache the results of expensive calculations, preventing unnecessary recalculations during re-renders.
+      2. Avoid unnecessary state updates:
+         - Be mindful of how and when you update state. Use functional updates with setState or state hooks (`useState`, `useReducer`) to avoid unnecessary state updates caused by stale closures.
+         - Leverage the `useCallback` hook to memoize the reference of event handler's function and prevent them from being recreated on each render.
+      3. Split and lazily load code (using webpack):
+         - Split your code into smaller, reusable components and use code-splitting techniques such as dynamic imports or React.lazy to load components only when needed. This can significantly improve initial loading times.
+      4. Optimize network requests:
+         - Minimize the size of assets by compressing and optimizing images, scripts, and stylesheets.
+         - Implement caching and use techniques like HTTP caching and conditional fetching to reduce unnecessary network requests.
+      5. Use module bundler for production code:
+         - When deploying your React application, use production build tool like webpack. These builds apply various optimizations, such as minification, dead code elimination, and more, to reduce the size and improve the performance of your application.
+      6. Implement virtualization:
+         - For large lists or grids, consider using virtualization libraries like react-window or react-virtualized. These libraries render only the visible portion of a list, improving rendering performance by reducing the number of DOM elements.
+      7. Throttle and Debounce
+   2. Techniques I used:
+      1. Using dynamic import and bundle the whole app using webpack.
+      2. Infinite scroll with throttle.
+      3. Using Redux to optimize rendering mechanism.
+
