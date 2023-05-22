@@ -36,6 +36,11 @@ Additionally, the app has some key features:
          > ```
       2. `PATCH` http://localhost:5173/api/task-list/{taskId}
       3. `POST` http://localhost:5173/api/task-list
+   - How to mock HTTP error response?
+     - > Add two query parameters: `method` and `status code`. 
+       > 
+       >  ex: get tasks with status code `400`: http://localhost:5173/task-list?mock=true&method=get&code=400
+       
    - Mock sever: [Mirage.js](https://miragejs.com/docs/getting-started/introduction/) (using in-memory database)
    - Working principle:
      - Mirage mocks the HTTP boundary, it intercepts any `XMLHttpRequest` or `fetch` requests your app makes and lets you mock the response.
