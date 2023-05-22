@@ -161,7 +161,6 @@ const DetailDrawer = props => {
           name: nameValue,
           description: descriptionValue,
           date: dateValue,
-          'create-date': null,
         }),
       })
 
