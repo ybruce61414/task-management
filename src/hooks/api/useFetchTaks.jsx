@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTasksContext } from '../../contexts/contextStore.jsx'
 import { DATA_STATE } from '../../reducers/index.jsx'
 import { processApiData } from '../../modules/TaskList/utils.js'
@@ -6,12 +6,14 @@ import { enqueueSnackbar } from 'notistack'
 
 
 const useFetchTasks = () => {
-  const [isFetching, setIsFetching] = useState(false)
   const { taskData, dispatchTaskData } = useTasksContext()
 
   const fetchData = async () => {
     try {
-      setIsFetching(true)
+      if (taskData.state !== DATA_STATE.init) {
+        dispatchTaskData({ type: DATA_STATE.fetching })
+      }
+
       const res = await fetch('http://localhost:5173/api/task-list')
       let successRes
 
@@ -38,8 +40,6 @@ const useFetchTasks = () => {
     } catch (err) {
       console.error(err)
       dispatchTaskData({ type: DATA_STATE.failed })
-    } finally {
-      setIsFetching(false)
     }
   }
 
@@ -52,10 +52,7 @@ const useFetchTasks = () => {
     }
   }, [taskData.state])
 
-  return {
-    isFetching,
-    rawData: taskData,
-  }
+  return { rawData: taskData }
 }
 
 export default useFetchTasks

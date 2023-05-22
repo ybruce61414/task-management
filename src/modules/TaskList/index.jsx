@@ -35,8 +35,15 @@ const TaskList = () => {
     originTo: 0,
   })
 
-  const { isFetching, rawData: taskData } = useFetchTasks()
-  const isLoading = isFetching || taskData.state === DATA_STATE.reload
+  const { rawData: taskData } = useFetchTasks()
+
+  const isLoading = [
+    DATA_STATE.reload,
+    DATA_STATE.fetching,
+    DATA_STATE.init,
+  ].includes(taskData.state)
+
+
 
   // refs
   // for scroll container

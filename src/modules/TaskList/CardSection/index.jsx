@@ -18,6 +18,7 @@ const CardSection = props => {
   if ([
     DATA_STATE.ready,
     DATA_STATE.reload,
+    DATA_STATE.fetching,
   ].includes(taskData.state)) {
     if (taskData.value?.length > 0) {
       // drawing cards

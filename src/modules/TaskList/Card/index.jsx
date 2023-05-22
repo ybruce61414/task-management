@@ -68,7 +68,8 @@ const CustomCard = forwardRef((props, ref) => {
   const onDelete = async () => {
     try {
       handleClose()
-      dispatchTaskData({ type: DATA_STATE.reload })
+      // dispatchTaskData({ type: DATA_STATE.reload })
+      dispatchTaskData({ type: DATA_STATE.fetching })
 
       const res = await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
         method: 'DELETE',
@@ -89,6 +90,7 @@ const CustomCard = forwardRef((props, ref) => {
         }
         case 200:
         case 204:
+          dispatchTaskData({ type: DATA_STATE.reload })
           enqueueSnackbar('deleted successfully', { variant: 'success' })
           break
         default:

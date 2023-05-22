@@ -105,7 +105,7 @@ const DetailDrawer = props => {
   const onEdit = async () => {
     try {
       onClose()
-      dispatchTaskData({ type: DATA_STATE.reload })
+      dispatchTaskData({ type: DATA_STATE.fetching })
 
       const url = `http://localhost:5173/api/task-list/${taskId}`
 
@@ -133,6 +133,7 @@ const DetailDrawer = props => {
         }
         case 200:
         case 201:
+          dispatchTaskData({ type: DATA_STATE.reload })
           enqueueSnackbar('edited successfully', { variant: 'success' })
           break
         default:
@@ -147,7 +148,7 @@ const DetailDrawer = props => {
   const onCreate = async () => {
     try {
       onClose()
-      dispatchTaskData({ type: DATA_STATE.reload })
+      dispatchTaskData({ type: DATA_STATE.fetching })
 
       const url = 'http://localhost:5173/api/task-list'
 
@@ -176,6 +177,7 @@ const DetailDrawer = props => {
         }
         case 200:
         case 201:
+          dispatchTaskData({ type: DATA_STATE.reload })
           enqueueSnackbar('created successfully', { variant: 'success' })
           break
         default:
