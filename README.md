@@ -9,17 +9,17 @@ Run the app locally:
 - Note: the query string *mock=true* is used to activate mock server.
 
 ## Overview
-The app demonstrates the view of tasks and **creating / editing / deleting**  actions. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
-They are all sorted by date.
+The app demonstrates the view of tasks and **creating / editing / deleting**  actions. A task card has 3 required input fields (*name*, *description*, *date*) with validations and the top-left icon number represents the *order* of card. 
+They are all sorted by *date*.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
-2. The view list handles large amount of fetching data (10,000 data records) with no pagination using **infinite scroll**.
+2. The view list handles a large amount of fetched data (10,000 records) with no pagination using **infinite scroll**.
 3. Optimizing scroll handler by **throttle**.
 
 
 
 ## Specs
-1. API spec assumptions from mock server:
+1. API spec assumptions (from mock server):
    - Tasks
       1. `GET` http://localhost:5173/api/tasks
          > ```json
