@@ -61,8 +61,9 @@ Additionally, the app has some key features:
 3. Third-party libraries used:
    1. [React Router v6](https://reactrouter.com/en/main/start/overview)
    2. [Material UI](https://mui.com/)
-   3. [Mirage](https://miragejs.com/docs/getting-started/introduction/) (mock server)
-   4. [Faker](https://fakerjs.dev/) (mock data generator)
+   3. [Notistack](https://notistack.com/)
+   4. [Mirage](https://miragejs.com/docs/getting-started/introduction/) (mock server)
+   5. [Faker](https://fakerjs.dev/) (mock data generator)
 
 ## Questionnaire
 1. [React](./questionnaire/React/README.md)
