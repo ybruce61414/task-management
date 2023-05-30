@@ -6,15 +6,15 @@ Run the app locally:
 1. `yarn install`
 2. `yarn dev`
 3. open with [http://localhost:5173/task-list?mock=true](http://localhost:5173/task-list?mock=true)
-- Note: the *query string* **mock=true** is used to activate mock server.
+- Note: the query string *mock=true* is used to activate mock server.
 
 ## Overview
-The app demonstrates the view of tasks and **creating / editing / deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
+The app demonstrates the view of tasks and **creating / editing / deleting**  actions. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
 They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
 2. The view list handles large amount of fetching data (10,000 data records) with no pagination using **infinite scroll**.
-3. Optimizing scroll handler by using **throttle**.
+3. Optimizing scroll handler by **throttle**.
 
 
 
@@ -44,7 +44,7 @@ Additionally, the app has some key features:
          >    "date": "2022-07-31T01:33:29.567Z"
          > }
          > ```
-   - How to mock HTTP error response?
+   - How to mock HTTP error response on the demo site?
      - > Add two query parameters: `method` and `code`. 
        > 
        >  ex: get tasks with status code `500`: http://localhost:5173/task-list?mock=true&method=get&code=500
