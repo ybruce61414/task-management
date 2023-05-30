@@ -14,7 +14,7 @@ import ActionGroup from './ActionGroup.jsx'
 import dayjs from 'dayjs'
 import { dateFormatter } from '../../../utils/index.js'
 import { styled } from '@mui/material'
-import {enqueueSnackbar} from "notistack";
+import { enqueueSnackbar } from 'notistack'
 
 
 const CustomTypography = styled(Typography)`

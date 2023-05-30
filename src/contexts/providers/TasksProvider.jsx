@@ -8,12 +8,11 @@ const initialTasks = {
   value: [],
 }
 
-const taskReducer = apiDataReducer([])
 const TasksProvider = props => {
   const { children } = props
 
   const [taskData, dispatchTaskData] = useReducer(
-    taskReducer,
+    apiDataReducer,
     initialTasks,
   )
 

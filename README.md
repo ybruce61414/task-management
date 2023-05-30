@@ -13,7 +13,7 @@ The app demonstrates the view of tasks and **creating / editing / deleting**  ac
 They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
-2. The view list handles large amount of fetching data with no pagination using **infinite scroll**.
+2. The view list handles large amount of fetching data (10,000 data records) with no pagination using **infinite scroll**.
 3. Optimizing scroll handler by using **throttle**.
 
 
