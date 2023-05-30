@@ -12,7 +12,7 @@ import styles from './styles.module.scss'
 import TasksProvider from '../../contexts/providers/TasksProvider.jsx'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import SnackBarHOC  from '../snackBars/index.jsx'
+import SnackBarHOC  from '../SnackBarHOC'
 
 
 const EntryContainer = () => {

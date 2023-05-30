@@ -128,7 +128,4 @@ export const SnackBarHOC = variant => forwardRef((props, ref) => {
 
 SnackBarHOC.displayName = 'SnackBarHOC'
 
-// ReportComplete.propTypes = {
-//   id: PropTypes.number,
-// }
 export default SnackBarHOC
