@@ -25,7 +25,7 @@ export default function (query) {
     },
     routes() {
       // url
-      const taskListUrl = '/api/task-list'
+      const taskListUrl = '/api/tasks'
 
       // http methods:
       // get tasks

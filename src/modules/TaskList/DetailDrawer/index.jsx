@@ -107,7 +107,7 @@ const DetailDrawer = props => {
       onClose()
       dispatchTaskData({ type: DATA_STATE.fetching })
 
-      const url = `http://localhost:5173/api/task-list/${taskId}`
+      const url = `http://localhost:5173/api/tasks/${taskId}`
 
       const res = await fetch(url, {
         method: 'PATCH',
@@ -150,7 +150,7 @@ const DetailDrawer = props => {
       onClose()
       dispatchTaskData({ type: DATA_STATE.fetching })
 
-      const url = 'http://localhost:5173/api/task-list'
+      const url = 'http://localhost:5173/api/tasks'
 
       const res = await fetch(url, {
         method: 'POST',

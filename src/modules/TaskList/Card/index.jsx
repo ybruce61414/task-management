@@ -71,7 +71,7 @@ const CustomCard = forwardRef((props, ref) => {
       // dispatchTaskData({ type: DATA_STATE.reload })
       dispatchTaskData({ type: DATA_STATE.fetching })
 
-      const res = await fetch(`http://localhost:5173/api/task-list/${taskId}`, {
+      const res = await fetch(`http://localhost:5173/api/tasks/${taskId}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json'

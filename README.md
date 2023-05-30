@@ -9,7 +9,7 @@ Run the app locally:
 - Note: the *query string* **mock=true** is used to activate mock server.
 
 ## Overview
-The app demonstrates **creating / editing / deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
+The app demonstrates the view of tasks and **creating / editing / deleting**  actions of tasks. A task card has 3 required input fields (*name*, *description*, *date*) and the top-left icon number represents the *order* of card. 
 They are all sorted by date.
 Additionally, the app has some key features:
 1. The app uses to make network request instead of mocking code coupling in codebase.
@@ -21,7 +21,7 @@ Additionally, the app has some key features:
 ## Specs
 1. API spec assumptions from mock server:
    - Tasks
-      1. `GET` http://localhost:5173/api/task-list
+      1. `GET` http://localhost:5173/api/tasks
          > ```json
          > {
          >    "data": [
@@ -34,8 +34,8 @@ Additionally, the app has some key features:
          >    ]
          > }
          > ```
-      2. `PATCH` http://localhost:5173/api/task-list/{taskId}
-      3. `POST` http://localhost:5173/api/task-list
+      2. `PATCH` http://localhost:5173/api/tasks/{taskId}
+      3. `POST` http://localhost:5173/api/tasks
          - payload:
          > ```json
          > {

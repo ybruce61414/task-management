@@ -14,7 +14,7 @@ const useFetchTasks = () => {
         dispatchTaskData({ type: DATA_STATE.fetching })
       }
 
-      const res = await fetch('http://localhost:5173/api/task-list')
+      const res = await fetch('http://localhost:5173/api/tasks')
       let successRes
 
       switch (res.status) {
